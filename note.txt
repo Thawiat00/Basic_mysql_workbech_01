@@ -102,3 +102,65 @@ ALTER DATABASE mydb READ ONLY = 0;
 ---------------
 
 part2
+
+//create table
+CREATE TABLE employees (
+	employee_id INT,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    hourly_pay DECIMAL(5,2),
+    hire_date DATE
+);
+
+//choose table
+SELECT * FROM employees;
+
+
+//rename table employees to workers
+RENAME TABLE employees TO workers;
+
+//rename table workers to employees;
+RENAME TABLE workers TO employees;
+
+//drop(delete) table
+DROP TABLE employees;
+
+
+//modify add field phone_number in employees table
+ALTER TABLE employees
+ADD phone_number VARCHAR(15);
+
+
+//rename field phone_number to email in employees table
+ALTER TABLE employees
+RENAME COLUMN phone_number TO email;
+
+
+// modify colum email have VARCHAR(100)  in employees table
+ALTER TABLE employees
+MODIFY COLUMN email VARCHAR(100);
+
+
+
+//modify colum email show after colum last name  in employees table
+ALTER TABLE employees
+MODIFY COLUMN email VARCHAR(100)
+AFTER last_name;
+
+SELECT * FROM employees;
+
+
+
+//modify colum email to show first in employees TABLE
+ALTER TABLE employees
+MODIFY COLUMN email VARCHAR(100)
+FIRST;
+
+SELECT * FROM employees;
+
+
+//modify to drop colum email in employees TABLE
+ALTER TABLE employees 
+DROP column email;
+
+SELECT * FROM employees;
