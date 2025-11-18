@@ -73,3 +73,32 @@ not working
 just do up on youtube only
 
 password :1111
+
+
+===========
+check process
+
+part 1
+MySQL: How to create a DATABASE
+
+// create database
+CREATE DATABASE myDB;
+
+
+// switch to use database 
+USE mydb
+
+//drop database
+DROP DATABASE mydb
+
+
+//read database only can not modify
+ALTER DATABASE mydb READ ONLY = 1;
+
+
+//read database only can modify
+ALTER DATABASE mydb READ ONLY = 0;
+
+---------------
+
+part2

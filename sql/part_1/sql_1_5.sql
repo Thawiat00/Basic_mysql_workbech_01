@@ -1,0 +1,1 @@
+ALTER DATABASE mydb READ ONLY = 0;
