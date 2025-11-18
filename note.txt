@@ -3,30 +3,65 @@ create docker-compose.yml
 
 --step 2 put command---------------
 
-version: '3.8'
+docker run -d \
+  --name=mysql-workbench \
+  --cap-add=IPC_LOCK \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Asia/Bangkok \
+  -p 3000:3000 \
+  -p 3001:3001 \
+  -v ~/mysql-workbench/config:/config \
+  --shm-size="1gb" \
+  --restart unless-stopped \
+  lscr.io/linuxserver/mysql-workbench:latest
 
-services:
-  mysql-workbench:
-    image: lscr.io/linuxserver/mysql-workbench:latest
-    container_name: mysql-workbench
-    cap_add:
-      - IPC_LOCK
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Asia/Bangkok
-    ports:
-      - "3000:3000"
-      - "3001:3001"
-    volumes:
-      - ./config:/config
-    shm_size: "1gb"
-    restart: unless-stopped
+-- step3 check container---
+
+docker ps | grep mysql-workbench
+```
+
+### ขั้นตอนที่ 5: เข้าใช้งาน MySQL Workbench
+เปิดเว็บเบราว์เซอร์และเข้าไปที่:
+```
+https://localhost:3001
+```
+
+หรือถ้าอยู่คนละเครื่อง:
+```
+https://your-server-ip:3001
+
+-- step6 connect database---
+
+เมื่อเปิด MySQL Workbench แล้ว:
+
+คลิก "+" เพื่อสร้าง connection ใหม่
+กรอกข้อมูล:
+
+Connection Name: ตั้งชื่อที่ต้องการ
+Hostname: IP ของ MySQL Server
+Port: 3306 (default)
+Username: root หรือ user ที่มี
+Password: (ถ้ามี)
 
 
--- step3 command docker compose---
 
-docker-compose up -d
+คำสั่งเพิ่มเติมที่อาจใช้:
+ดู logs:
+bashdocker logs mysql-workbench
+หยุด container:
+bashdocker stop mysql-workbench
+เริ่ม container อีกครั้ง:
+bashdocker start mysql-workbench
+ลบ container:
+bashdocker stop mysql-workbench
+docker rm mysql-workbench
 
 
--- step4 command docker compose---
+
+======================
+
+check tutorial
+
+
+https://www.youtube.com/playlist?list=PLZPZq0r_RZOMskz6MdsMOgxzheIyjo-BZ
